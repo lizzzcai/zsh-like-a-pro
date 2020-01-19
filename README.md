@@ -78,47 +78,78 @@ open iTerm2 preferences dialog, go to **iTerm2 → Preferences → Profiles → 
 ## Plugins
 
 ### incr
+https://mimosa-pudica.net/zsh-incremental.html
+
+Incremental completion on zsh
 
 1. Download the plugin
 ```bash
 $ mkdir $ZSH_CUSTOM/plugins/incr
 $ wget http://mimosa-pudica.net/src/incr-0.2.zsh -O $ZSH_CUSTOM/plugins/incr/incr.plugin.zsh
 ```
-2. Activate the plugin in `~/.zshrc:`
+2. Activate the plugin in `~/.zshrc`:
 
 ```
 plugins=( [plugins...] incr)
 ```
 
 ### zsh-autosuggestions
-1. Clone to oh my zsh.
-```bash
+https://github.com/zsh-users/zsh-autosuggestions
+
+It suggests commands as you type based on history and completions.
+
+1. Clone the repository into `$ZSH_CUSTOM/plugins` (by default `~/.oh-my-zsh/custom/plugins`)
+```sh
 $ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 ```
 
-2. Activate the plugin in `~/.zshrc:`
+2. Add the plugin to the list of plugins for Oh My Zsh to load (inside `~/.zshrc`):
 
-```
+```sh
 plugins=( [plugins...] zsh-autosuggestions)
 ```
 
+3. How to use
 
-## autojump
+As you type commands, you will see a completion offered after the cursor in a muted gray color. This color can be changed by setting the `ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE` variable. See [configuration](https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#configuration).
 
-Activate the plugin in `~/.zshrc:`
+If you press the <kbd>→</kbd> key (`forward-char` widget) or <kbd>End</kbd> (`end-of-line` widget) with the cursor at the end of the buffer, it will accept the suggestion, replacing the contents of the command line buffer with the suggestion.
 
+If you invoke the `forward-word` widget, it will partially accept the suggestion up to the point that the cursor moves to.
+
+
+### autojump
+https://github.com/wting/autojump
+
+autojump is a faster way to navigate your filesystem.
+1. Install by brew
+```bash
+$ brew install autojump
+```
+
+2. Activate the plugin in `~/.zshrc`:
 ```
 plugins=( [plugins...] autojump)
 ```
 
+3. How to use
+```
+refer: https://github.com/wting/autojump
+```
+
 ### syntax-highlighting
+
+https://github.com/zsh-users/zsh-syntax-highlighting
+
+This package provides syntax highlighting for the shell zsh. It enables highlighting of commands whilst they are typed at a zsh prompt into an interactive terminal. This helps in reviewing commands before running them, particularly in catching syntax errors.
+
 
 1. Clone this repository in oh-my-zsh's plugins directory:
 ```bash
 $ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
-2. Activate the plugin in `~/.zshrc:`
+2. Activate the plugin in `~/.zshrc`:
 
 ```
 plugins=( [plugins...] zsh-syntax-highlighting)
@@ -142,24 +173,32 @@ plugins=(
 # Deploy the .zshrc to HOME
 
 1. Check the difference
-
 ```bash
-$ diff .my.zshrc ~/.zshrc
+$ make diff
 ```
-2. Copy it to HOME
+
+2. Backup the config
 ```bash
-$ cp .my.zshrc ~/.zshrc
+$ make backup
+```
+
+3. Copy it to HOME
+```bash
+$ make copy
 ```
 
 
 # Deploy the .p10k.zsh to HOME
 
 1. Check the difference
-
 ```bash
-$ diff .my.p10k.zsh ~/.p10k.zsh
+$ make diff
 ```
-2. Copy it to HOME
+2. Backup the config
 ```bash
-$ cp .my.p10k.zsh ~/.p10k.zsh
+$ make backup
+```
+3. Copy it to HOME
+```bash
+$ make copy
 ```
